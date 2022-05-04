@@ -1,0 +1,499 @@
+Enter user-name: system
+Enter password:
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - 64bit Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+
+SQL> connect system/Viru9029@orcl
+Connected.
+
+******************************************************************************************************************
+
+#TABLE NO 1:
+SQL> create table CLIENT_MASTER(CLIENTNO varchar2(6) primary key check(CLIENTNO like 'C%') , NAME varchar2(20) not null , CITY varchar2(15) ,PINCODE number(8) , STATE varchar2(15) , BALDUE number(10,2));
+
+Table created.
+
+SQL> desc CLIENT_MASTER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENTNO                                  NOT NULL VARCHAR2(6)
+ NAME                                      NOT NULL VARCHAR2(20)
+ CITY                                               VARCHAR2(15)
+ PINCODE                                            NUMBER(8)
+ STATE                                              VARCHAR2(15)
+ BALDUE                                             NUMBER(10,2)
+
+
+SQL> insert into client_master(CLIENTNO,NAME,CITY,PINCODE,STATE,BALDUE) values('C00001','Ivan Bayross','Mumbai',400054,'Maharashtra',15000);
+
+1 row created.
+
+SQL> insert into client_master(CLIENTNO,NAME,CITY,PINCODE,STATE,BALDUE) values('C00003','Chhaya Bankar','Mumbai',400057,'Maharashtra',5000);
+
+1 row created.
+
+SQL> insert into client_master(CLIENTNO,NAME,CITY,PINCODE,STATE,BALDUE) values('C00004','Ashwini Joshi','Bangalore',560001,'Karnataka',0);
+
+1 row created.
+
+SQL> insert into client_master(CLIENTNO,NAME,CITY,PINCODE,STATE,BALDUE) values('C00005','Hansel Colaco','Mumbai',400060,'Maharashtra',200);
+
+1 row created.
+
+SQL> insert into client_master(CLIENTNO,NAME,CITY,PINCODE,STATE,BALDUE) values('C00006','Deepak Sharma','Mangalore',560050,'Karnataka',0);
+
+
+
+
+SQL> select * from CLIENT_MASTER;
+
+CLIENT NAME                 CITY               PINCODE STATE               BALDUE
+------ -------------------- --------------- ---------- --------------- ----------
+C00001 Ivan Bayross         Mumbai              400054 Maharashtra          15000
+C00003 Chhaya Bankar        Mumbai              400057 Maharashtra           5000
+C00004 Ashwini Joshi        Bangalore           560001 Karnataka                0
+C00005 Hansel Colaco        Mumbai              400060 Maharashtra            200
+C00006 Deepak Sharma        Mangalore           560050 Karnataka                0
+
+
+
+***************************************************************************************************************
+
+
+#TABLE NO 2:
+SQL> SQL> create table PRODUCT_MASTER(PRODUCTNO varchar2(6) primary key check(PRODUCTNO like 'P%'),DESCRIPTION varchar2(15) not null , PROFITPERCENT number(4,2) not null, UNITMEASURE varchar2(10) not null,QTYONHAND number(8) not null,REORDERLVL number(8) not null , SELLPRICE number(8,2) not null check(SELLPRICE !=0),COSTPRICE number(8,2) not null check(COSTPRICE !=0));
+
+Table created.
+
+
+SQL> desc PRODUCT_MASTER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCTNO                                 NOT NULL VARCHAR2(6)
+ DESCRIPTION                               NOT NULL VARCHAR2(15)
+ PROFITPERCENT                             NOT NULL NUMBER(4,2)
+ UNITMEASURE                               NOT NULL VARCHAR2(10)
+ QTYONHAND                                 NOT NULL NUMBER(8)
+ REORDERLVL                                NOT NULL NUMBER(8)
+ SELLPRICE                                 NOT NULL NUMBER(8,2)
+ COSTPRICE                                 NOT NULL NUMBER(8,2)
+
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P00001','T-Shirts',5,'Piece',200,50,350,250);
+
+1 row created.
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P03453','Shirts',6,'Piece',150,50,500,350);
+
+1 row created.
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P06734','Cotton Jeans',5,'Piece',100,20,600,450);
+
+1 row created.
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P07865','Jeans',5,'Piece',100,20,750,500);
+
+1 row created.
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P07868','Trousers',2,'Piece',150,50,850,550);
+
+1 row created.
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P07885','Pull Overs',2.5,'Piece',80,30,700,450);
+
+1 row created.
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P07965','Denim Shirts',4,'Piece',100,40,350,250);
+
+1 row created.
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P07975','Lycra Tops',5,'Piece',70,30,300,175);
+
+1 row created.
+
+SQL> insert into PRODUCT_MASTER(PRODUCTNO,DESCRIPTION,PROFITPERCENT,UNITMEASURE,QTYONHAND,REORDERLVL,SELLPRICE,COSTPRICE) values('P08865','Skirts',5,'Piece',75,30,450,300);
+
+1 row created.
+
+
+
+
+
+SQL> select * from PRODUCT_MASTER;
+
+PRODUC DESCRIPTION     PROFITPERCENT UNITMEASUR  QTYONHAND REORDERLVL  SELLPRICE  COSTPRICE
+------ --------------- ------------- ---------- ---------- ---------- ---------- ----------
+P00001 T-Shirts                    5 Piece             200         50        350        250
+P03453 Shirts                      6 Piece             150         50        500        350
+P06734 Cotton Jeans                5 Piece             100         20        600        450
+P07865 Jeans                       5 Piece             100         20        750        500
+P07868 Trousers                    2 Piece             150         50        850        550
+P07885 Pull Overs                2.5 Piece              80         30        700        450
+P07965 Denim Shirts                4 Piece             100         40        350        250
+P07975 Lycra Tops                  5 Piece              70         30        300        175
+P08865 Skirts                      5 Piece              75         30        450        300
+
+9 rows selected.
+
+
+
+**************************************************************************************************************
+
+
+
+#TABLE NO 3:
+
+SQL> create table SALESMAN_MASTER(SALESMANNO varchar2(6) primary key check(SALESMANNO like 'S%'),SALESMANNAME varchar2(20) not null,ADDRESS1 varchar2(30) not null,ADDRESS2 varchar2(30),CITY varchar2(20),PINCODE number(8),STATE varchar2(20),SALAMT number(8,2) not null check(SALAMT != 0),TGTTOGET number(6,2) not null check(TGTTOGET != 0),YTDSALES number(6,2) not null,REMARKS varchar2(60));
+
+Table created.
+
+
+
+SQL> desc salesman_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SALESMANNO                                NOT NULL VARCHAR2(6)
+ SALESMANNAME                              NOT NULL VARCHAR2(20)
+ ADDRESS1                                  NOT NULL VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ CITY                                               VARCHAR2(20)
+ PINCODE                                            NUMBER(8)
+ STATE                                              VARCHAR2(20)
+ SALAMT                                    NOT NULL NUMBER(8,2)
+ TGTTOGET                                  NOT NULL NUMBER(6,2)
+ YTDSALES                                  NOT NULL NUMBER(6,2)
+ REMARKS                                            VARCHAR2(60)
+
+
+
+SQL> insert into SALESMAN_MASTER(SALESMANNO,SALESMANNAME,ADDRESS1,ADDRESS2,CITY,PINCODE,STATE,SALAMT,TGTTOGET,YTDSALES,REMARKS) values('S00001','Aman','A/14','Worli','Mumbai',400002,'Maharashtra',3000,100,50,'Good');
+
+1 row created.
+
+SQL> insert into SALESMAN_MASTER(SALESMANNO,SALESMANNAME,ADDRESS1,ADDRESS2,CITY,PINCODE,STATE,SALAMT,TGTTOGET,YTDSALES,REMARKS) values('S00002','Omkar','65','Nariman','Mumbai',400001,'Maharashtra',3000,200,100,'Good');
+
+1 row created.
+
+SQL> insert into SALESMAN_MASTER(SALESMANNO,SALESMANNAME,ADDRESS1,ADDRESS2,CITY,PINCODE,STATE,SALAMT,TGTTOGET,YTDSALES,REMARKS) values('S00003','Raj','P-7','Bandra','Mumbai',400032,'Maharashtra',3000,200,100,'Good');
+
+1 row created.
+
+SQL> insert into SALESMAN_MASTER(SALESMANNO,SALESMANNAME,ADDRESS1,ADDRESS2,CITY,PINCODE,STATE,SALAMT,TGTTOGET,YTDSALES,REMARKS) values('S00004','Ashish','A/5','Juhu','Bombay',400044,'Maharashtra',3500,200,150,'Good');
+
+1 row created.
+
+
+
+SQL> select * from SALESMAN_MASTER;
+
+SALESM SALESMANNAME         ADDRESS1                       ADDRESS2                       CITY                    PINCODE STATE                 SALAMT   TGTTOGET   YTDSALES REMARKS
+------ -------------------- ------------------------------ ------------------------------ -------------------- ---------- -------------------- ---------- ---------- ---------- ------------------------------------------------------------
+S00001 Aman                 A/14                           Worli                          Mumbai                   400002 Maharashtra                     3000        100         50 Good
+S00002 Omkar                65                             Nariman                        Mumbai                   400001 Maharashtra                     3000        200        100 Good
+S00003 Raj                  P-7                            Bandra                         Mumbai                   400032 Maharashtra                     3000        200        100 Good
+S00004 Ashish               A/5                            Juhu                           Bombay                   400044 Maharashtra                     3500        200        150 Good
+
+
+
+**********************************************************************************************************************
+
+
+
+#TABLE NO 4:
+
+SQL> create table SALES_ORDER(ORDERNO varchar2(6) primary key check(ORDERNO like 'O%'),CLIENTNO varchar2(6) ,ORDERDATE date not null,DELYADDR varchar2(25),SALESMANNO varchar2(6) ,DELYTYPE char(1),BILLTYPE char(1),DELYDATE date,ORDERSTATUS varchar2(10),foreign key(CLIENTNO) references CLIENT_MASTER(CLIENTNO),foreign key(SALESMANNO) references SALESMAN_MASTER(SALESMANNO));
+
+Table created.
+
+
+
+SQL> desc SALES_ORDER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDERNO                                   NOT NULL VARCHAR2(6)
+ CLIENTNO                                           VARCHAR2(6)
+ ORDERDATE                                 NOT NULL DATE
+ DELYADDR                                           VARCHAR2(25)
+ SALESMANNO                                         VARCHAR2(6)
+ DELYTYPE                                           CHAR(1)
+ BILLTYPE                                           CHAR(1)
+ DELYDATE                                           DATE
+ ORDERSTATUS                                        VARCHAR2(10)
+
+
+SQL> insert into SALES_ORDER(ORDERNO,CLIENTNO,ORDERDATE,DELYADDR,SALESMANNO,DELYTYPE,BILLTYPE,DELYDATE,ORDERSTATUS) values('O19003','C00001','03-APR-02','Delhi','S00001','F','Y','07-APR-02','Fulfilled');
+
+1 row created.
+
+SQL> insert into SALES_ORDER(ORDERNO,CLIENTNO,ORDERDATE,DELYADDR,SALESMANNO,DELYTYPE,BILLTYPE,DELYDATE,ORDERSTATUS) values('O46866','C00004','20-MAY-02','Delhi','S00002','P','N','22-MAY-02','Cancelled');
+
+1 row created.
+
+SQL> insert into SALES_ORDER(ORDERNO,CLIENTNO,ORDERDATE,DELYADDR,SALESMANNO,DELYTYPE,BILLTYPE,DELYDATE,ORDERSTATUS) values('O19008','C00005','24-MAY-02','Delhi','S00004','F','N','26-JUL-96','In Process');
+
+1 row created.
+
+SQL> insert into SALES_ORDER(ORDERNO,CLIENTNO,ORDERDATE,DELYADDR,SALESMANNO,DELYTYPE,BILLTYPE,DELYDATE,ORDERSTATUS) values('O19001','C00001','12-JUN-02','Delhi','S00001','F','N','20-JUL-02','In Process');
+
+1 row created.
+
+SQL> insert into SALES_ORDER(ORDERNO,CLIENTNO,ORDERDATE,DELYADDR,SALESMANNO,DELYTYPE,BILLTYPE,DELYDATE,ORDERSTATUS) values('O19002','C00006','25-JUN-02','Delhi','S00002','P','N','27-JUL-02','Cancelled');
+
+1 row created.
+
+
+
+SQL> select * from SALES_ORDER;
+
+ORDERN CLIENT ORDERDATE DELYADDR                  SALESM D B DELYDATE  ORDERSTATU
+------ ------ --------- ------------------------- ------ - - --------- ----------
+O19003 C00001 03-APR-02 Delhi                     S00001 F Y 07-APR-02 Fulfilled
+O46866 C00004 20-MAY-02 Delhi                     S00002 P N 22-MAY-02 Cancelled
+O19008 C00005 24-MAY-02 Delhi                     S00004 F N 26-JUL-96 In Process
+O19001 C00001 12-JUN-02 Delhi                     S00001 F N 20-JUL-02 In Process
+O19002 C00006 25-JUN-02 Delhi                     S00002 P N 27-JUL-02 Cancelled
+
+Note: In client_master table C00002 is not available so I wrote in client C00006.
+
+
+
+
+******************************************************************************************************************
+
+#TABLE NO 5:
+
+SQL> create table SALES_ORDER_DETAILS(ORDERNO varchar2(6),PRODUCTNO varchar2(6),QTYORDERED number(8),QTYDISP number(8),PRODUCTRATE number(10,2),foreign key(ORDERNO) references SALES_ORDER(ORDERNO),foreign key(PRODUCTNO) references PRODUCT_MASTER(PRODUCTNO));
+
+Table created.
+
+
+
+SQL> desc SALES_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDERNO                                            VARCHAR2(6)
+ PRODUCTNO                                          VARCHAR2(6)
+ QTYORDERED                                         NUMBER(8)
+ QTYDISP                                            NUMBER(8)
+ PRODUCTRATE                                        NUMBER(10,2)
+
+
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O19001','P00001',4,4,525);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O19001','P07965',2,1,8400);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O19001','P07885',2,1,5250);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O19002','P00001',10,0,525);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O46866','P07868',3,3,3150);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O46866','P07885',3,1,5250);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O46866','P00001',10,10,525);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O46866','P03453',4,4,1050);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O19003','P03453',2,2,1050);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O19003','P06734',1,1,12000);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O46866','P07965',1,0,8400);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O46866','P07975',1,0,1050);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O19008','P00001',10,5,525);
+
+1 row created.
+
+SQL> insert into SALES_ORDER_DETAILS(ORDERNO,PRODUCTNO,QTYORDERED,QTYDISP,PRODUCTRATE) values('O19008','P07975',5,3,1050);
+
+1 row created.
+
+
+
+SQL> select * from SALES_ORDER_DETAILS;
+
+ORDERN PRODUC QTYORDERED    QTYDISP PRODUCTRATE
+------ ------ ---------- ---------- -----------
+O19001 P00001          4          4         525
+O19001 P07965          2          1        8400
+O19001 P07885          2          1        5250
+O19002 P00001         10          0         525
+O46866 P07868          3          3        3150
+O46866 P07885          3          1        5250
+O46866 P00001         10         10         525
+O46866 P03453          4          4        1050
+O19003 P03453          2          2        1050
+O19003 P06734          1          1       12000
+O46866 P07965          1          0        8400
+
+ORDERN PRODUC QTYORDERED    QTYDISP PRODUCTRATE
+------ ------ ---------- ---------- -----------
+O46866 P07975          1          0        1050
+O19008 P00001         10          5         525
+O19008 P07975          5          3        1050
+
+
+
+
+
+#3.  Generate the SQL statements to perform the following computations on table data in Python IDLE:
+
+"""#a.List the names of all clients having ‘a’ as the second letter in their names.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+qury = "select name from client_master where name like '_a%'"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    print("Name of client : ",i[0])
+cursor.close()
+con.close()"""
+
+
+
+"""#b. List the clients who stay in a city whose first letter is ‘M’.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+qury = "select name from client_master where city like 'M%'"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    print("Name of client(Who stay in starting letter 'M') : ",i[0])
+cursor.close()
+con.close()"""
+
+
+
+"""#c. List all clients who stay in ‘Bangalore’ or ‘Mangalore’.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+qury = "select name from client_master where city ='Bangalore' or city='Mangalore'"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    print("Name of those client Who are stay in Bangalore or Mangalore. : ",i[0])
+cursor.close()
+con.close()"""
+
+
+"""#d. List all clients whose BalDue is greater than value 10000.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+qury = "select name from client_master where baldue > 10000"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    print("Name of those client whose Balance due is greater then 10000 : ",i[0])
+cursor.close()
+con.close()
+"""
+
+
+
+"""#e.List all information from the Sales_order table for order placed in the month of June.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+qury = "select * from sales_order where to_char(orderdate,'MON') = 'JUN'"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    print("ORDERNO : ",i[0],"CLIENTNO : ",i[1],"ORDERDATE : ",i[2].strftime("%A, %b-%d-%Y"),"DELYADDR : ",i[3],"SALESMANNO : ",i[4],
+          "DELYTYPE : ",i[5],"BILLTYPE : ",i[6],"DELYDATE : ",i[7].strftime("%A, %b-%d-%Y"),"ORDERSTATUS : ",i[8])
+cursor.close()
+con.close()"""
+
+"""#f. List the Order No & day on which clients placed their order.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+#qury = "select orderno,orderdate from sales_order"
+qury = "SELECT ORDERNO,TO_CHAR("ORDERDATE",'DAY') FROM SALES_ORDER"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    #print("Order No : ",i[0],"Day : ",i[1].strftime("%d"))
+    print("Order No : ",i[0],"Day : ",i[1])
+cursor.close()
+con.close()"""
+
+
+
+"""#g. List the names, city and state of clients who are not in the state of ‘Maharashtra’.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+qury = "select name,city from client_master where state != 'Maharashtra'"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    print("Name : ",i[0]," ","City : ",i[1])
+cursor.close()
+con.close()"""
+
+
+
+
+
+#4. Exercises on Using Having, Group By and Joins in Python IDLE:
+"""
+#a. Printing the description and total quantity sold for each product.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+qury = "select p.description,sum(s.qtyordered) from product_master p,sales_order_details s where s.productno=p.productno group by p.description"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    print("Description : ",i[0])
+    print("Quanity : ",i[1])
+cursor.close()
+con.close()"""
+
+
+
+"""#b. Calculating the average quantity sold for each client that has a maximum order value of 15000.00.
+import cx_Oracle
+con = cx_Oracle.connect("system/Viru9029@localhost:1521/orcl")
+cursor = con.cursor()
+qury = "SELECT CM.CLIENTNO,CM.NAME, AVG(SOD.QTYDISP) FROM SALES_ORDER_DETAILS SOD, CLIENT_MASTER CM,SALES_ORDER SO " \
+       "WHERE CM.CLIENTNO = SO.CLIENTNO AND SO.ORDERNO = SOD.ORDERNO GROUP BY CM.CLIENTNO,CM.NAME HAVING MAX(SOD.QTYORDERED * SOD.PRODUCTRATE) > 15000"
+cursor.execute(qury)
+result = cursor.fetchall()
+for i in result:
+    print("CLIENT NO : ",i[0],"  ","CLIENT NAME : ",i[1],"   ","ORDER AVERAGE : ",i[2])
+cursor.close()
+con.close()"""
